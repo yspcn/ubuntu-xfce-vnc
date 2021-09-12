@@ -96,7 +96,15 @@ vncserver -kill $DISPLAY &> $STARTUPDIR/vnc_startup.log \
 
 echo -e "start vncserver with param: VNC_COL_DEPTH=$VNC_COL_DEPTH, VNC_RESOLUTION=$VNC_RESOLUTION\n..."
 if [[ $DEBUG == true ]]; then echo "vncserver $DISPLAY -depth $VNC_COL_DEPTH -geometry $VNC_RESOLUTION"; fi
-vncserver $DISPLAY -depth $VNC_COL_DEPTH -geometry $VNC_RESOLUTION &> $STARTUPDIR/no_vnc_startup.log
+if [[ $ARCH =~ x86_64 ]]; then
+  vncserver $DISPLAY -depth $VNC_COL_DEPTH -geometry $VNC_RESOLUTION &> $STARTUPDIR/no_vnc_startup.log
+fi
+if [[ $ARCH =~ aarch64 ]]; then
+  LD_PRELOAD=/lib/aarch64-linux-gnu/libgcc_s.so.1 vncserver $DISPLAY -depth $VNC_COL_DEPTH -geometry $VNC_RESOLUTION &> $STARTUPDIR/no_vnc_startup.log
+fi
+if [[ $ARCH =~ arm ]]; then
+  LD_PRELOAD=/lib/arm-linux-gnueabihf/libgcc_s.so.1 vncserver $DISPLAY -depth $VNC_COL_DEPTH -geometry $VNC_RESOLUTION &> $STARTUPDIR/no_vnc_startup.log
+fi
 echo -e "start window manager\n..."
 $HOME/wm_startup.sh &> $STARTUPDIR/wm_startup.log
 

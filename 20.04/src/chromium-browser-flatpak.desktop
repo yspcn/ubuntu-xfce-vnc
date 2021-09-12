@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=chromium flatpak
+Comment=
+Exec=flatpak run org.chromium.Chromium --no-sandbox
+Icon=
+Path=
+Terminal=false
+StartupNotify=false
+
