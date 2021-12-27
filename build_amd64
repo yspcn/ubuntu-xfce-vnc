@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-USER=neuroidss
+USER=6053537
 NAME=ubuntu-xfce-vnc
 
 for arch in amd64; do
