@@ -58,6 +58,9 @@ RUN $INST_SCRIPTS/firefox_apt.sh
 RUN $INST_SCRIPTS/xfce_ui.sh
 ADD ./src/common/xfce/ $HOME/
 RUN apt install fcitx fcitx-frontend-gtk2 fcitx-frontend-gtk3 fcitx-libpinyin -y
+RUN echo "export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0 \n\
+export LIBGL_ALWAYS_INDIRECT=1" \
+>> ~/.bashrc
 RUN echo 'export LANG=zh_CN.UTF-8 \n\
 export LANGUAGE=zh_CN:en_US \n\
 export LC_CTYPE=zh_CN.UTF-8 \n\
