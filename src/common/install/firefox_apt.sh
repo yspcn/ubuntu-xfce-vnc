@@ -23,6 +23,6 @@ EOF_FF
 #yum -y install firefox
 #yum clean all
 apt-get update
-apt-get install -y firefox
+apt-get install -y firefox firefox-locale-zh-hans
 apt-mark hold firefox
 apt-get clean -y
