@@ -57,6 +57,14 @@ RUN $INST_SCRIPTS/firefox_apt.sh
 ### Install xfce UI
 RUN $INST_SCRIPTS/xfce_ui.sh
 ADD ./src/common/xfce/ $HOME/
+RUN apt install fcitx fcitx-frontend-gtk2 fcitx-frontend-gtk3 fcitx-libpinyin -y
+RUN echo 'export LANG=zh_CN.UTF-8 \n\
+export LANGUAGE=zh_CN:en_US \n\
+export LC_CTYPE=zh_CN.UTF-8 \n\
+export GTK_IM_MODULE=fcitx \n\
+export QT_IM_MODULE=fcitx \n\
+export XMODIFIERS="@im=fcitx"'\
+>> /etc/.xprofile
 
 ### configure startup
 RUN $INST_SCRIPTS/libnss_wrapper.sh
